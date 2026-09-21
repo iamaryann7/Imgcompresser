@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SizeSnap — Compress Images to Your Exact Size</title>
+    <meta
+        name="description"
+        content="Compress your images to the size you need. Fast, private and easy to use."
+    >
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container header-inner">
+
+            <a href="#" class="brand">
+                <span class="brand-icon">S</span>
+                <span>SizeSnap</span>
+            </a>
+
+            <span class="header-note">
+                Simple. Private. Free.
+            </span>
+
+        </div>
+    </header>
+
+
+    <!-- Main -->
+    <main>
+
+        <section class="hero">
+            <div class="container">
+
+                <div class="hero-content">
+
+                    <div class="eyebrow">
+                        IMAGE SIZE MADE SIMPLE
+                    </div>
+
+                    <h1>
+                        Make your image<br>
+                        <span>the size you need.</span>
+                    </h1>
+
+                    <p class="hero-text">
+                        Upload an image, choose the size you want,
+                        and download the compressed version in seconds.
+                    </p>
+
+                </div>
+
+
+                <!-- Compressor Card -->
+                <section class="compressor-card">
+
+                    <!-- Step indicator -->
+                    <div class="steps">
+
+                        <div class="step active" data-step="1">
+                            <span>1</span>
+                            <p>Upload</p>
+                        </div>
+
+                        <div class="step-line"></div>
+
+                        <div class="step" data-step="2">
+                            <span>2</span>
+                            <p>Choose size</p>
+                        </div>
+
+                        <div class="step-line"></div>
+
+                        <div class="step" data-step="3">
+                            <span>3</span>
+                            <p>Download</p>
+                        </div>
+
+                    </div>
+
+
+                    <!-- Upload Screen -->
+                    <div id="uploadScreen" class="screen active-screen">
+
+                        <div
+                            id="dropZone"
+                            class="drop-zone"
+                            tabindex="0"
+                        >
+
+                            <div class="upload-icon">
+                                <svg
+                                    width="32"
+                                    height="32"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="1.8"
+                                >
+                                    <path d="M12 16V4"></path>
+                                    <path d="M7 9l5-5 5 5"></path>
+                                    <path d="M5 20h14"></path>
+                                </svg>
+                            </div>
+
+                            <h2>Drop your image here</h2>
+
+                            <p>
+                                or choose a file from your device
+                            </p>
+
+                            <button
+                                type="button"
+                                id="chooseFileBtn"
+                                class="primary-button"
+                            >
+                                Choose image
+                            </button>
+
+                            <input
+                                type="file"
+                                id="fileInput"
+                                accept="image/jpeg,image/png,image/webp"
+                                hidden
+                            >
+
+                            <small>
+                                JPG, PNG or WebP · Max 20 MB
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Size Screen -->
+                    <div id="sizeScreen" class="screen">
+
+                        <button
+                            type="button"
+                            id="backToUpload"
+                            class="back-button"
+                        >
+                            ← Choose another image
+                        </button>
+
+
+                        <div class="selected-file">
+
+                            <div class="file-thumbnail">
+                                <img id="imagePreview" src="" alt="Selected image">
+                            </div>
+
+                            <div class="file-info">
+
+                                <strong id="fileName">
+                                    image.jpg
+                                </strong>
+
+                                <span id="originalSize">
+                                    0 KB
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="target-section">
+
+                            <div class="section-label">
+                                <label for="targetSize">
+                                    What size should the image be?
+                                </label>
+
+                                <span>
+                                    Target size
+                                </span>
+                            </div>
+
+
+                            <div class="size-input-wrapper">
+
+                                <input
+                                    type="number"
+                                    id="targetSize"
+                                    min="10"
+                                    step="1"
+                                    placeholder="500"
+                                >
+
+                                <select id="sizeUnit">
+                                    <option value="KB">KB</option>
+                                    <option value="MB">MB</option>
+                                </select>
+
+                            </div>
+
+
+                            <div class="quick-sizes">
+
+                                <button
+                                    type="button"
+                                    class="quick-size"
+                                    data-size="100"
+                                    data-unit="KB"
+                                >
+                                    100 KB
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="quick-size"
+                                    data-size="500"
+                                    data-unit="KB"
+                                >
+                                    500 KB
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="quick-size"
+                                    data-size="1"
+                                    data-unit="MB"
+                                >
+                                    1 MB
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="quick-size"
+                                    data-size="2"
+                                    data-unit="MB"
+                                >
+                                    2 MB
+                                </button>
+
+                            </div>
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            id="compressBtn"
+                            class="compress-button"
+                        >
+                            <span>Compress image</span>
+                            <span>→</span>
+                        </button>
+
+
+                        <p class="privacy-note">
+                            🔒 Your image is processed on your device.
+                            It isn't uploaded to a server.
+                        </p>
+
+                    </div>
+
+
+                    <!-- Processing Screen -->
+                    <div id="processingScreen" class="screen">
+
+                        <div class="processing-content">
+
+                            <div class="loader"></div>
+
+                            <h2>Working on your image...</h2>
+
+                            <p>
+                                Finding the best quality for your target size.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Result Screen -->
+                    <div id="resultScreen" class="screen">
+
+                        <div class="result-header">
+
+                            <div class="success-icon">
+                                ✓
+                            </div>
+
+                            <div>
+                                <h2>Your image is ready</h2>
+                                <p id="resultMessage">
+                                    We've reduced the file size while keeping
+                                    the image looking good.
+                                </p>
+                            </div>
+
+                        </div>
+
+
+                        <div class="result-grid">
+
+                            <div class="result-preview">
+                                <img
+                                    id="resultImage"
+                                    src=""
+                                    alt="Compressed image"
+                                >
+                            </div>
+
+
+                            <div class="size-comparison">
+
+                                <div class="size-box">
+                                    <span>Original</span>
+                                    <strong id="resultOriginalSize">
+                                        0 KB
+                                    </strong>
+                                </div>
+
+                                <div class="arrow">
+                                    →
+                                </div>
+
+                                <div class="size-box highlight">
+                                    <span>New size</span>
+                                    <strong id="resultNewSize">
+                                        0 KB
+                                    </strong>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="saved-info">
+
+                            <strong id="savedPercentage">
+                                0%
+                            </strong>
+
+                            <span>
+                                smaller than the original
+                            </span>
+
+                        </div>
+
+
+                        <div class="result-actions">
+
+                            <a
+                                id="downloadBtn"
+                                class="download-button"
+                                href="#"
+                                download
+                            >
+                                <span>↓</span>
+                                Download image
+                            </a>
+
+                            <button
+                                type="button"
+                                id="compressAnotherBtn"
+                                class="secondary-button"
+                            >
+                                Compress another
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Error -->
+                    <div
+                        id="errorMessage"
+                        class="error-message"
+                        role="alert"
+                    ></div>
+
+                </section>
+
+            </div>
+        </section>
+
+
+        <!-- Small information section -->
+        <section class="info-section">
+
+            <div class="container info-grid">
+
+                <div class="info-item">
+                    <div class="info-number">01</div>
+                    <h3>Upload</h3>
+                    <p>
+                        Pick the photo you want to make smaller.
+                    </p>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-number">02</div>
+                    <h3>Set your size</h3>
+                    <p>
+                        Tell us exactly how large the final file should be.
+                    </p>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-number">03</div>
+                    <h3>Download</h3>
+                    <p>
+                        Get your optimized image with one click.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="site-footer">
+
+        <div class="container footer-inner">
+
+            <span>
+                © 2026 SizeSnap
+            </span>
+
+            <span>
+                Images stay on your device.
+            </span>
+
+        </div>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
